@@ -1,4 +1,4 @@
-import { Header, Footer } from "@/components/shared/layout";
+import { Header, Footer, HeaderActions } from "@/components/shared/layout";
 import { cn } from "@/lib/utils";
 
 export interface PublicLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -23,10 +23,13 @@ export function PublicLayout({
       {showHeader && (
         <Header>
           <div className="text-xl font-semibold">Site</div>
+          <HeaderActions showAvatar={false} />
         </Header>
       )}
 
-      <main className={cn("flex-1", className)}>{children}</main>
+      <main className={cn("flex-1 px-4 md:px-6 py-6 md:py-8", className)}>
+        {children}
+      </main>
 
       {showFooter && (
         <Footer>

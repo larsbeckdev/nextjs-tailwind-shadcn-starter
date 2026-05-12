@@ -30,9 +30,5 @@ export default function ShellRootLayout({
     </div>
   );
 
-  return (
-    <ShellLayout sidebar={sidebar}>
-      <div className="p-6">{children}</div>
-    </ShellLayout>
-  );
+  return <ShellLayout sidebar={sidebar}>{children}</ShellLayout>;
 }
