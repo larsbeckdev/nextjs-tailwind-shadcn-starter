@@ -1,36 +1,176 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js + Shadcn/ui + Tailwind CSS Starter
 
-## Getting Started
+A modern, production-ready starter template for building web applications with **Next.js 16**, **React 19**, **TypeScript**, **Tailwind CSS v4**, and **shadcn/ui** components.
 
-First, run the development server:
+## Features
+
+✨ **Modern Stack**
+- [Next.js 16.2.6](https://nextjs.org) with App Router & Turbopack
+- [React 19.2.4](https://react.dev) with latest hooks
+- [TypeScript 5](https://www.typescriptlang.org) with strict mode
+- [Tailwind CSS v4](https://tailwindcss.com) with custom design tokens
+- [shadcn/ui](https://ui.shadcn.com) - 55+ accessible components
+
+🎨 **Theme & Styling**
+- Dark/Light mode with [next-themes](https://github.com/pacocoursey/next-themes)
+- CSS custom properties for design tokens (color, spacing, radius)
+- OKLch color space support
+- Responsive design with mobile-first approach
+
+📦 **Built-in Features**
+- Toast notifications with [sonner](https://sonner.emilkowal.ski)
+- Tooltips with [Radix UI](https://www.radix-ui.com)
+- Form handling & validation ready
+- Accessible components with ARIA labels
+- Server & Client component patterns
+
+🏗️ **Architecture**
+- Route groups for logical area separation (auth, public, shell)
+- Reusable layout components per area
+- Shared component library
+- Organized section components
+- Barrel exports for clean imports
+
+## Quick Start
+
+### Prerequisites
+- Node.js 18+ 
+- npm, yarn, pnpm, or bun
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone <your-repo-url>
+
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see your app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/
+│   ├── (auth)/               # Authentication route group
+│   │   ├── login/
+│   │   ├── signup/
+│   │   ├── forgot-password/
+│   │   └── layout.tsx        # Auth layout wrapper
+│   │
+│   ├── (public)/             # Public route group
+│   │   ├── page.tsx          # Landing page
+│   │   ├── features/
+│   │   ├── pricing/
+│   │   ├── faq/
+│   │   ├── contact/
+│   │   └── layout.tsx        # Public layout wrapper
+│   │
+│   ├── (shell)/              # App shell route group
+│   │   ├── dashboard/
+│   │   ├── settings/
+│   │   ├── profile/
+│   │   ├── users/
+│   │   ├── analytics/
+│   │   └── layout.tsx        # Shell layout wrapper
+│   │
+│   └── layout.tsx            # Root layout with providers
+│
+├── components/
+│   ├── (auth)/               # Auth-specific sections
+│   │   ├── login/
+│   │   ├── signup/
+│   │   └── layout/
+│   │
+│   ├── (public)/             # Public-specific sections
+│   │   ├── hero-section.tsx
+│   │   ├── layout/
+│   │   └── ...
+│   │
+│   ├── (shell)/              # Shell-specific sections
+│   │   ├── layout/
+│   │   ├── settings/
+│   │   └── ...
+│   │
+│   ├── shared/               # Shared across all areas
+│   │   ├── layout/           # Header, Footer, Sidebar, ThemeToggle, AvatarMenu
+│   │   ├── form-fields/      # Form components
+│   │   ├── cards/            # Card components
+│   │   ├── modals/           # Modal components
+│   │   ├── tables/           # Table components
+│   │   ├── charts/           # Chart components
+│   │   └── buttons/          # Custom button variants
+│   │
+│   ├── ui/                   # shadcn/ui components
+│   └── providers.tsx         # Global providers (Theme, Tooltips, Toasts)
+│
+├── lib/
+│   └── utils.ts              # Utility functions
+│
+└── globals.css               # Design tokens & global styles
+```
 
-## Learn More
+## Available Scripts
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Development
+npm run dev       # Start dev server with hot reload
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Production
+npm run build     # Build for production
+npm run start     # Start production server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Code Quality
+npm run lint      # Run ESLint
+```
 
-## Deploy on Vercel
+## Customization
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Design Tokens
+Edit `src/globals.css` to customize:
+- Color palette (oklch format)
+- Typography scales
+- Spacing system
+- Border radius
+- Animation durations
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Add shadcn Components
+```bash
+npx shadcn-ui@latest add <component-name>
+```
+
+### Create New Route Group
+1. Create folder: `src/app/(area)/page-name/`
+2. Create layout: `src/components/(area)/layout/`
+3. Create sections: `src/components/(area)/page-name/`
+
+## Dark Mode
+
+Dark mode is automatically integrated with next-themes. Users can toggle between light, dark, and system preferences. The theme is stored in localStorage and applied via the `.dark` class.
+
+## Deployment
+
+Deploy easily to [Vercel](https://vercel.com) (recommended for Next.js):
+
+```bash
+npm install -g vercel
+vercel
+```
+
+Or deploy to any Node.js-compatible platform (AWS, Heroku, Railway, etc.)
+
+## Documentation
+
+- [Next.js Docs](https://nextjs.org/docs)
+- [shadcn/ui Docs](https://ui.shadcn.com)
+- [Tailwind CSS Docs](https://tailwindcss.com/docs)
+- [TypeScript Docs](https://www.typescriptlang.org/docs/)
+
+## License
+
+MIT
