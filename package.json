@@ -5,10 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "audit": "npm audit",
+    "audit:fix": "npm audit fix"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
+    "@fontsource-variable/geist": "^5.2.8",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -37,5 +40,8 @@
     "@types/react-dom": "^19",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "8.5.14"
   }
 }
