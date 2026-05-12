@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 
 export function useKeyboardThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -25,11 +25,11 @@ export function useKeyboardThemeToggle() {
       // Only toggle on 'D' key when not typing
       if ((event.key === "d" || event.key === "D") && !isInput) {
         event.preventDefault();
-        setTheme(theme === "light" ? "dark" : "light");
+        setTheme(resolvedTheme === "dark" ? "light" : "dark");
       }
     };
 
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [theme, setTheme, mounted]);
+  }, [resolvedTheme, setTheme, mounted]);
 }
