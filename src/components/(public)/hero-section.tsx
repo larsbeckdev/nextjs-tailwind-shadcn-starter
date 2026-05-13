@@ -1,12 +1,44 @@
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+
+const featureCards = [
+  {
+    title: "Area-based Architecture",
+    description:
+      "Separate auth, public, and shell areas with dedicated layouts and reusable section components.",
+  },
+  {
+    title: "Ready-to-use UI Stack",
+    description:
+      "Tailwind CSS v4 and shadcn/ui components give you accessible, customizable building blocks from day one.",
+  },
+  {
+    title: "Developer Experience",
+    description:
+      "TypeScript strict mode, clean imports, and scalable conventions help teams ship features consistently.",
+  },
+];
+
+const stackHighlights = [
+  { label: "Next.js 16", value: "App Router + Turbopack" },
+  { label: "React 19", value: "Modern rendering model" },
+  { label: "shadcn/ui", value: "Accessible primitives" },
+];
 
 export function HeroSection() {
   return (
     <section className="mx-auto flex w-full max-w-5xl flex-col gap-10 py-6 md:py-10">
       <div className="space-y-4">
-        <p className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
-          Next.js + shadcn/ui Starter
-        </p>
+        <Badge variant="outline">Next.js + shadcn/ui Starter</Badge>
         <h1 className="max-w-3xl text-4xl font-bold leading-tight tracking-tight md:text-5xl">
           Build modern web apps faster with a clean, scalable foundation.
         </h1>
@@ -16,63 +48,54 @@ export function HeroSection() {
         </p>
       </div>
 
-      <div className="flex flex-wrap items-center gap-3">
-        <Link
-          href="/dashboard"
-          className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90">
-          Open Dashboard
-        </Link>
-        <Link
-          href="/login"
-          className="inline-flex items-center rounded-md border border-border bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground">
-          Try Auth Flow
-        </Link>
-      </div>
+      <Card className="rounded-lg border">
+        <CardHeader>
+          <CardTitle className="text-base">Route Groups</CardTitle>
+          <CardDescription>
+            Organize your routes into isolated app areas while keeping shared UI
+            reusable.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-wrap gap-2">
+          <Button asChild size="lg">
+            <Link href="/dashboard">Open Dashboard</Link>
+          </Button>
+          <Button asChild variant="secondary" size="lg">
+            <Link href="/login">Try Auth Flow</Link>
+          </Button>
+        </CardContent>
+      </Card>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <article className="rounded-lg border border-border bg-card p-5">
-          <h2 className="text-base font-semibold">Area-based Architecture</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Separate auth, public, and shell areas with dedicated layouts and
-            reusable section components.
-          </p>
-        </article>
-
-        <article className="rounded-lg border border-border bg-card p-5">
-          <h2 className="text-base font-semibold">Ready-to-use UI Stack</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Tailwind CSS v4 and shadcn/ui components give you accessible,
-            customizable building blocks from day one.
-          </p>
-        </article>
-
-        <article className="rounded-lg border border-border bg-card p-5">
-          <h2 className="text-base font-semibold">Developer Experience</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            TypeScript strict mode, clean imports, and scalable conventions help
-            teams ship features consistently.
-          </p>
-        </article>
+        {featureCards.map((feature) => (
+          <Card key={feature.title} className="rounded-lg border">
+            <CardHeader>
+              <CardTitle className="text-base">{feature.title}</CardTitle>
+              <CardDescription>{feature.description}</CardDescription>
+            </CardHeader>
+          </Card>
+        ))}
       </div>
 
-      <div className="grid gap-4 rounded-lg border border-border bg-muted/40 p-5 md:grid-cols-3">
-        <div>
-          <p className="text-2xl font-semibold">Next.js 16</p>
-          <p className="text-sm text-muted-foreground">
-            App Router + Turbopack
-          </p>
-        </div>
-        <div>
-          <p className="text-2xl font-semibold">React 19</p>
-          <p className="text-sm text-muted-foreground">
-            Modern rendering model
-          </p>
-        </div>
-        <div>
-          <p className="text-2xl font-semibold">shadcn/ui</p>
-          <p className="text-sm text-muted-foreground">Accessible primitives</p>
-        </div>
-      </div>
+      <Card className="rounded-lg border bg-muted/40">
+        <CardHeader>
+          <CardTitle className="text-base">Core Stack</CardTitle>
+          <CardDescription>
+            Production-ready defaults for modern app development.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4 md:grid-cols-3">
+          {stackHighlights.map((item, index) => (
+            <div key={item.label} className="space-y-1">
+              <p className="text-2xl font-semibold">{item.label}</p>
+              <p className="text-sm text-muted-foreground">{item.value}</p>
+              {index < stackHighlights.length - 1 ? (
+                <Separator className="mt-3 md:hidden" />
+              ) : null}
+            </div>
+          ))}
+        </CardContent>
+      </Card>
     </section>
   );
 }
